@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [Repos, setRepos] = useState("");
+  // https://api.github.com/users/hacktivist123/repos
+  useEffect(() => {
+    const URL = "https://api.github.com/users/AhsanKhan7/repos";
+    fetch(URL)
+      .then((response) => response.json())
+      .then((reponse) => setRepos(reponse));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My Repositories</h1>
+      <h2>{JSON.stringify(Repos)}</h2>
     </div>
   );
 }
